@@ -1,0 +1,27 @@
+PATCH类别： 1: bug\ 2: performance 3: reliability 4: feature 5: maintenance
+bug： 11: semantic、 12: concurrency、 13: memory、 14: error code
+bug导致的后果： 101: corruption、 crash、 error、 deadlock、 hang、 leak、 wrong
+(\d{3}) patch_type:patch_subtype:consequence:failure_path
+每种大类bug的细分
+patch size: 绝对值相加
+按加密算法类别
+// 对称加密（ aes）、 非对称、 哈希、 伪随机
+(\d\d\d) module_type:module_subtype
+按模块（ cipher、 compress、 digest)
+performance patch type： 运算速度、 资源消耗
+reliability： robust、 error enhancement、 annotation、 debug
+feature： 增加新算法
+maintenance： 重构、 修改信息、
+
+def pdict2Pseq(pdict)
+def mdict2Mseq(mtype, subtype)
+def pseq2Pdict(pseq)
+def mseq2Mdict(mseq)
+
+{
+    "timestamp":14247545665,
+    "commit_id": "1605b8471d64c855bc2493abf3adf6a1ebc3e645",
+    "pseq": "1221",
+    "size": 65,
+    "mseq": "32"
+}
