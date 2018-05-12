@@ -18,9 +18,6 @@ dbs = Db()
 redisCli = dbs.dbRedis(addrOwner='xzliu', auth=True)
 # sys.setrecursionlimit(1000000)
 
-def get_timestamp(s):
-    return datetime.strptime(s, '%Y-%m-%d').timestamp()
-
 def main():
     # commit = {'age':'','msg':'','ath':'','fls':'','lns':'','id':'','pid':'', 'typ':'0','sta':'0'}
     # from Utils import Utils

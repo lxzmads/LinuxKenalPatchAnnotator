@@ -1,10 +1,13 @@
 # coding: utf-8
 import os,pickle
 import redis
+import config
 
 class Worker():
     def __init__(self, redisCli):
         self.redisCli = redisCli
+        self.key = config.RKEY
+
     def get_task_list(self):
         if os.path.exists("pipelock.lock"):
             with open("pipelock.lock", "rb") as f:
@@ -15,14 +18,14 @@ class Worker():
             with self.redisCli.pipeline() as poppipe:
                 while True:
                     try:
-                        poppipe.watch('bbtask')
-                        tasklist = poppipe.zrange('bbtask',0,9)
+                        poppipe.watch(self.key)
+                        tasklist = poppipe.zrange(self.key, 0, 9)
                         self.task_locker(tasklist=tasklist)
                         # print(tasklist)
                         if tasklist:
                             poppipe.multi()
                             for item in tasklist:
-                                poppipe.zrem('bbtask', item)
+                                poppipe.zrem(self.key, item)
                         # else:
                         #     print('There are no more tasks for the time being.')
                             poppipe.execute()
