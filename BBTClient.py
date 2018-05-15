@@ -53,7 +53,7 @@ class BBTA():
         self.tab2 = ttk.Frame(self.tabControl)  # Add a second tab
         self.tabControl.add(self.tab2, text='Help')  # Make second tab visible
         self.tabControl.pack(expand=1, fill="both")  # Pack to make visible
-
+        # img = tk.Image("photo", file="ice-cream.png")
         Label(
             self.tab2,
             text=
@@ -215,6 +215,9 @@ class BBTA():
             self.currentPdict['failp'] = 'not'
 
     def start(self):
+        img = tk.Image("photo", file="ice-cream.png")
+        self.root.tk.call('wm','iconphoto',self.root._w,img)
+        # self.root.iconbitmap('ice-cream.png')
         self.root.mainloop()
 
     def get_task(self):
@@ -277,7 +280,7 @@ class BBTA():
         self.currentState = self.BEFORE_STATE
         self.root.title('Current: ' + str(self.currentIndex))
         self.lfGround.configure(
-            text='Commit Id:' + self.tasklist[self.currentIndex].decode().split('/')[0])
+            text='Commit Id:' + self.tasklist[0].decode().split('/')[0])
         self.bOpen.configure(state='normal')
         self.remainMsg.set(len(self.tasklist))
         self.bPassTask.configure(state='disabled')
@@ -349,12 +352,12 @@ class BBTA():
         self.inTaskState()
 
     def pass_task(self):
-        t = str(self.tasklist[self.currentIndex].decode().split('/')[0])
-        status = int(self.tasklist[self.currentIndex].decode().split('/')[1])
+        t = str(self.tasklist[0].decode().split('/')[0])
+        status = int(self.tasklist[0].decode().split('/')[1])
         # self.lRemainMsg.configure(text=str(int(self.lRemainMsg.cget('text')) - 1))
         self.cant.append(t + '/' + str(status + 1) + '/' + config.NICK_NAME)
         # print(self.cant)
-        self.tasklist.pop(self.currentIndex)
+        self.tasklist.pop(0)
         self.currentIndex -= 1
         self.afterTaskState()
         # display_task()
@@ -398,10 +401,10 @@ class BBTA():
         # print(self.currentTask)
         # print(ret)
         # lStateMsg.config(text=str(int(lStateMsg.cget('text')) - 1))
-        t = str(self.tasklist[self.currentIndex].decode().split('/')[0])
-        status = int(self.tasklist[self.currentIndex].decode().split('/')[1])
+        t = str(self.tasklist[0].decode().split('/')[0])
+        status = int(self.tasklist[0].decode().split('/')[1])
         self.ret.append(t + '/' + str(status + 1) + '/' + config.NICK_NAME)
-        self.tasklist.pop(self.currentIndex)
+        self.tasklist.pop(0)
         # pt = self.cbTypes.get()
         # Get information we need and put it into mongo.
         # ct = self.cbCtyptos.get()

@@ -58,7 +58,7 @@ def main():
                 # commit['fls'] = tds[3].string
                 # commit['lns'] = tds[4].get_text()
                 # print(cid)
-                redisp.zadd('bbtask',0, cid)
+                redisp.zadd('btask',0, cid)
                 ssum += 1
         try:
             if ssum > 0:
